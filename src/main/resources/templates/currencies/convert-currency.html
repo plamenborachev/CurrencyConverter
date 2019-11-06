@@ -22,7 +22,10 @@
 
             <div class="form-group" th:classappend="${#fields.hasErrors('fromCurrency')} ? 'text-danger'">
                 <label for="from_currency" class="font-weight-bold">From Currency</label>
-                <input type="text" class="form-control" id="from_currency" name="fromCurrency" th:field="*{fromCurrency}">
+<!--                <input type="text" class="form-control" id="from_currency" name="fromCurrency" th:field="*{fromCurrency}">-->
+                <select multiple="" class="form-control" id="from_currency" name="fromCurrency">
+                    <option selected disabled>--- Select Currency ---</option>
+                </select>
                 <th:block th:if="${#fields.hasErrors('fromCurrency')}">
                     <small class="text-danger" th:errors="*{fromCurrency}"></small>
                 </th:block>
@@ -30,7 +33,10 @@
 
             <div class="form-group" th:classappend="${#fields.hasErrors('toCurrency')} ? 'text-danger'">
                 <label for="to_currency" class="font-weight-bold">To Currency</label>
-                <input type="text" class="form-control" id="to_currency" name="code" th:field="*{toCurrency}">
+<!--                <input type="text" class="form-control" id="to_currency" name="code" th:field="*{toCurrency}">-->
+                <select multiple="" class="form-control" id="to_currency" name="toCurrency">
+                    <option selected disabled>--- Select Currency ---</option>
+                </select>
                 <th:block th:if="${#fields.hasErrors('toCurrency')}">
                     <small class="text-danger" th:errors="*{toCurrency}"></small>
                 </th:block>
@@ -57,5 +63,25 @@
     <th:block th:include="~{fragments/footer}"></th:block>
 </footer>
 </body>
+
+<script>
+    fetch('/currencies/fetch')
+        .then((response) => response.json())
+        .then((json) => {
+        json.forEach((currency) => $('#from_currency')
+            .append(`<option value="${currency.name}">${currency.name}</option>`));
+    })
+    .catch((err) => console.log(err));
+
+    fetch('/currencies/fetch')
+        .then((response) => response.json())
+        .then((json) => {
+            json.forEach((currency) => $('#to_currency')
+                .append(`<option value="${currency.name}">${currency.name}</option>`));
+        })
+        .catch((err) => console.log(err));
+</script>
+
+</html>
 
 </html>
