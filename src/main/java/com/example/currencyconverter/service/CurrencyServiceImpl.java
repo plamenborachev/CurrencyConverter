@@ -79,9 +79,8 @@ public class CurrencyServiceImpl implements CurrencyService {
         BigDecimal result = amount
                 .divide(fromCurrency.getPerUnitOfCurrency(), 6, RoundingMode.HALF_UP)
                 .multiply(fromCurrency.getRate())
-                .divide(toCurrencyReverseRate, 6, RoundingMode.HALF_UP)
-                .multiply(toCurrency.getPerUnitOfCurrency());
+                .multiply(toCurrencyReverseRate);
 
-        return result;
+        return result.setScale(6, RoundingMode.HALF_UP);
     }
 }
