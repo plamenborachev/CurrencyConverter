@@ -23,20 +23,22 @@
                 <thead>
                 <tr class="row mx-auto font-weight-bold table-info">
                     <th class="col-md-1 text-center">#</th>
-                    <th class="col-md-2 text-center">Currency</th>
+                    <th class="col-md-3 text-center">Currency</th>
                     <th class="col-md-2 text-center">Code</th>
                     <th class="col-md-2 text-center">Per Unit Of Currency</th>
                     <th class="col-md-2 text-center">Levs (BGN)</th>
+                    <th class="col-md-2 text-center">BNB Levs (BGN)</th>
                 </tr>
                 </thead>
                 <tbody>
                 <th:block th:each="currency, iter : ${currencies}">
                     <tr class="row mx-auto">
                         <th class="col-md-1 text-center" th:utext="${iter.index + 1}"></th>
-                        <td class="col-md-2 text-center" th:utext="${currency.name}"></td>
+                        <td class="col-md-3 text-center" th:utext="${currency.name}"></td>
                         <td class="col-md-2 text-center" th:utext="${currency.code}"></td>
                         <td class="col-md-2 text-center" th:utext="${currency.perUnitOfCurrency}"></td>
                         <td class="col-md-2 text-center" th:utext="${currency.rate}"></td>
+                        <td class="col-md-2 text-center" th:utext="${currency.bnbRate}"></td>
                     </tr>
                 </th:block>
                 </tbody>

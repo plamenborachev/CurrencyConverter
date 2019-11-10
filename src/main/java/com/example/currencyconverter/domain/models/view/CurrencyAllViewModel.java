@@ -9,6 +9,7 @@ public class CurrencyAllViewModel {
     private String code;
     private Integer perUnitOfCurrency;
     private BigDecimal rate;
+    private BigDecimal bnbRate;
 
     public CurrencyAllViewModel() {
     }
@@ -51,5 +52,13 @@ public class CurrencyAllViewModel {
 
     public void setRate(BigDecimal rate) {
         this.rate = rate;
+    }
+
+    public BigDecimal getBnbRate() {
+        return this.bnbRate;
+    }
+
+    public void setBnbRate(BigDecimal bnbRate) {
+        this.bnbRate = bnbRate;
     }
 }

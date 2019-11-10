@@ -1,7 +1,6 @@
 package com.example.currencyconverter.domain.models.binding;
 
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
@@ -15,7 +14,6 @@ public class CurrencyAddBindingModel {
     public CurrencyAddBindingModel() {
     }
 
-    @NotNull(message = "Currency name cannot be null")
     @Size(min = 3, max = 20, message = "Currency name must be between 3 and 20 characters!")
     public String getName() {
         return this.name;

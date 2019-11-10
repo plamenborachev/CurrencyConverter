@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -84,13 +85,12 @@ public class CurrencyController {
 
     @GetMapping("/fetch")
     @ResponseBody
-    public List<CurrencyViewModel> fetchCurrencies() {
+    public List<CurrencyViewModel> fetchCurrencies() throws IOException {
         return this.currencyService.findAllCurrencies()
                 .stream()
                 .map(c -> this.modelMapper.map(c, CurrencyViewModel.class))
                 .collect(Collectors.toList());
     }
-
 
     @ExceptionHandler({CurrencyNameAlreadyExistsException.class})
     public ModelAndView handleProductNameALreadyExist(CurrencyNameAlreadyExistsException e) {

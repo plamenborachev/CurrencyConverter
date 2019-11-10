@@ -6,9 +6,14 @@ import com.example.currencyconverter.domain.models.service.CurrencyServiceModel;
 import com.example.currencyconverter.error.CurrencyNameAlreadyExistsException;
 import com.example.currencyconverter.repository.CurrencyRepository;
 import com.example.currencyconverter.validation.CurrencyValidationService;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
@@ -48,11 +53,27 @@ public class CurrencyServiceImpl implements CurrencyService {
     }
 
     @Override
-    public List<CurrencyServiceModel> findAllCurrencies() {
-        return this.currencyRepository.findAll()
+    public List<CurrencyServiceModel> findAllCurrencies() throws IOException {
+        List<CurrencyServiceModel> allCurrencies = this.currencyRepository.findAll()
                 .stream()
                 .map(c -> this.modelMapper.map(c, CurrencyServiceModel.class))
                 .collect(Collectors.toList());
+
+        String url = "http://bnb.bg/Statistics/StExternalSector/StExchangeRates/StERForeignCurrencies/index.htm?toLang=_EN";
+        Document document = Jsoup.connect(url).get();
+        Elements rates = document.select("td.center");
+
+        for (CurrencyServiceModel currency : allCurrencies) {
+            for (int i = 0; i < rates.size(); i += 3) {
+                String val = rates.get(i).text();
+                if (val.equals(currency.getCode())){
+                    BigDecimal bnbRate = BigDecimal.valueOf(Double.parseDouble(rates.get(i + 1).text()));
+                    currency.setBnbRate(bnbRate);
+                    break;
+                }
+            }
+        }
+        return allCurrencies;
     }
 
     @Override
