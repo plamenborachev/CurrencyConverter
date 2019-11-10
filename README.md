@@ -17,3 +17,5 @@
 Management команда за извличане на текущият курс от сайта на БНБ (http://bnb.bg/Statistics/StExternalSector/StExchangeRates/StERForeignCurrencies/index.htm)
 
 Бонус условие - В администрацията да се добави бутон “Синхронизирай сега”, който да извиква логиката за автоматичното извличане на текущия курс от БНБ
+
+https://currency-converter-pbo.herokuapp.com/
