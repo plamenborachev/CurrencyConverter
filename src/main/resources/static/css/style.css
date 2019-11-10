@@ -33,6 +33,10 @@ nav li{
     text-align: center;
 }
 
+.mt-3{
+    margin-top: 0 !important;
+}
+
 .affix {
     top: 20px;
     z-index: 9999 !important;
@@ -40,6 +44,11 @@ nav li{
 
 h1, .h1 {
     font-size: 4.5rem;
+}
+
+.jumbotron{
+    padding: 0 0;
+    margin-bottom: 0;
 }
 
 /*.demo {*/
