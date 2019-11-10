@@ -73,13 +73,11 @@ public class CurrencyServiceImpl implements CurrencyService {
             throw new CurrencyNameAlreadyExistsException(toCurrencyStr + GlobalConstants.CURRENCY_DOES_NOT_EXISTS_MESSAGE);
         }
 
-        BigDecimal toCurrencyReverseRate = toCurrency.getPerUnitOfCurrency()
-                .divide(toCurrency.getRate(), 6, RoundingMode.HALF_UP);
-
         BigDecimal result = amount
                 .divide(fromCurrency.getPerUnitOfCurrency(), 6, RoundingMode.HALF_UP)
                 .multiply(fromCurrency.getRate())
-                .multiply(toCurrencyReverseRate);
+                .divide(toCurrency.getRate(), 6, RoundingMode.HALF_UP)
+                .multiply(toCurrency.getPerUnitOfCurrency());
 
         return result.setScale(6, RoundingMode.HALF_UP);
     }
