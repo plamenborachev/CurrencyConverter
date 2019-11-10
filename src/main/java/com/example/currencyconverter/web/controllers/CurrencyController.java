@@ -36,7 +36,7 @@ public class CurrencyController {
     public ModelAndView addCurrency(ModelAndView modelAndView,
                                     @ModelAttribute(name = "model") CurrencyAddBindingModel model){
         modelAndView.addObject("model", model);
-        modelAndView.setViewName("/currencies/add-currency");
+        modelAndView.setViewName("currencies/add-currency");
         return modelAndView;
     }
 
@@ -46,7 +46,7 @@ public class CurrencyController {
                                            BindingResult bindingResult){
         if (bindingResult.hasErrors()){
             modelAndView.addObject("model", model);
-            modelAndView.setViewName("/currencies/add-currency");
+            modelAndView.setViewName("currencies/add-currency");
             return modelAndView;
         }
 
@@ -61,7 +61,7 @@ public class CurrencyController {
     public ModelAndView convertCurrency(ModelAndView modelAndView,
                                         @ModelAttribute(name = "model") ConverterBindingModel model){
         modelAndView.addObject("model", model);
-        modelAndView.setViewName("/currencies/convert-currency");
+        modelAndView.setViewName("currencies/convert-currency");
         return modelAndView;
     }
 
@@ -71,14 +71,14 @@ public class CurrencyController {
                                                 BindingResult bindingResult){
         if (bindingResult.hasErrors()){
             modelAndView.addObject("model", model);
-            modelAndView.setViewName("/currencies/convert-currency");
+            modelAndView.setViewName("currencies/convert-currency");
             return modelAndView;
         }
 
         model.setResult(this.currencyService.convertCurrency(model.getFromCurrency(),
                 model.getToCurrency(), model.getAmount()));
         modelAndView.addObject("model", model);
-        modelAndView.setViewName("/currencies/convert-currency-result");
+        modelAndView.setViewName("currencies/convert-currency-result");
         return modelAndView;
     }
 
